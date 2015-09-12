@@ -49,6 +49,8 @@ crashlytics-build.properties
 ### Sass template
 .sass-cache/
 *.css.map
+### Bower Template
+bower_components
 ### Node template
 # Logs
 logs

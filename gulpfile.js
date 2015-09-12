@@ -52,7 +52,6 @@ var tasks = {
 
     sass: function() {
         return gulp.src(paths.lib + '**/*.scss')
-            .pipe(sourcemaps.init())
             .pipe(sass({
                 outputStyle: 'expanded'
             }))
@@ -69,7 +68,6 @@ var tasks = {
             }))
             .pipe(rename(pkg.name + '.min.css'))
             .pipe(header(banner, {pkg: pkg, date: new Date()}))
-            .pipe(sourcemaps.write('./'))
             .pipe(notify('Sass styles completed'))
             .pipe(gulp.dest(paths.dist));
     },
@@ -88,7 +86,7 @@ var tasks = {
     },
 
     scripts: function() {
-        return gulp.src(paths.lib + '**/*.js')
+        return gulp.src(paths.lib + '**/' + pkg.name + '.js')
             .pipe(rename(pkg.name + '.js'))
             .pipe(gulp.dest(paths.dist))
             .pipe(uglify()).on('error', notify.onError('Error: <%= error.message %>'))
@@ -100,9 +98,13 @@ var tasks = {
 };
 
 gulp.task('sass', tasks.sass);
-gulp.task('csslint', tasks.csslint);
+gulp.task('csslint', ['sass'], function() {
+    return tasks.csslint();
+});
 gulp.task('lint', tasks.lint);
-gulp.task('scripts', tasks.scripts);
+gulp.task('scripts', ['lint'], function() {
+    return tasks.scripts();
+});
 gulp.task('mocha', tasks.mocha);
 
 gulp.task('watch', ['csslint', 'sass', 'lint', 'scripts', 'mocha'], function() {
