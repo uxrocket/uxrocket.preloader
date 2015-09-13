@@ -7,7 +7,7 @@ var expect = chai.expect;
 describe('Testing UX Rocket Preloader', function() {
     describe('Properties', function() {
         it('should have version property', function() {
-
+            expect($.uxrpreloader).to.have.property('version');
         });
     });
 });
