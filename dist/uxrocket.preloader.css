@@ -19,12 +19,34 @@
   background-color: #ffdf00;
 }
 
-.uxr-preloader.uxr-preloader-start:before {
+.uxr-preloader-start:before {
   transition: all 3s ease-out;
   width: 95%;
 }
 
-.uxr-preloader.uxr-preloader-end:before {
-  transition: all 0.5s ease-in;
-  width: 100%;
+.uxr-preloader-end:before {
+  -webkit-animation: end-loading 0.75s ease-in forwards;
+          animation: end-loading 0.75s ease-in forwards;
+}
+
+@-webkit-keyframes end-loading {
+  50% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes end-loading {
+  50% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
 }

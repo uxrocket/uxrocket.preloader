@@ -20,13 +20,17 @@ $preloader-version: '0.1.0';
         background-color: #ffdf00;
     }
 
-    &.uxr-preloader-start:before {
+    &-start:before {
         transition: all 3s ease-out;
         width: 95%;
     }
 
-    &.uxr-preloader-end:before {
-        transition: all .5s ease-in;
-        width: 100%;
+    &-end:before {
+        animation: end-loading .75s ease-in forwards;
     }
+}
+
+@keyframes end-loading {
+    50% { width: 100%; opacity: 1; }
+    100% { width: 100%; opacity: 0; }
 }
